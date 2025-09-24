@@ -1,0 +1,36 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+site_url: "https://trident-gymnastics.netlify.app"
+display_url: "https://trident-gymnastics.netlify.app"
+
+collections:
+  - name: "holidays"
+    label: "School Holidays"
+    files:
+      - file: "content/holidays.yml"
+        label: "Holiday entries"
+        name: "holiday_entries"
+        fields:
+          - label: "Holidays"
+            name: "holidays"
+            widget: "list"
+            fields:
+              - { name: "season", label: "Season", widget: "select", options: ["Summer","Autumn","Winter","Spring"] }
+              - { name: "term_year", label: "Term & Year", widget: "string" }
+              - { name: "start", label: "Start date", widget: "date" }
+              - { name: "end", label: "End date", widget: "date" }
+              - { name: "operating_rules", label: "Operating notes", widget: "text" }
+              - label: "Programs"
+                name: "programs"
+                widget: "list"
+                fields:
+                  - { name: "name", label: "Name", widget: "string" }
+                  - { name: "blurb", label: "Blurb", widget: "text" }
+                  - { name: "age", label: "Age range", widget: "string" }
+                  - { name: "book_url", label: "Booking URL", widget: "string" }
+              - { name: "last_updated", label: "Last updated", widget: "datetime" }

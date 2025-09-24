@@ -1,0 +1,292 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const { siteConfig } = await import('../config/site');
+const fullTitle = title === 'Home' ? siteConfig.siteName : `${title} | ${siteConfig.siteName}`;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description || siteConfig.siteDescription} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- SEO Meta Tags -->
+    <title>{fullTitle}</title>
+    <meta name="description" content={description || siteConfig.siteDescription} />
+    
+    <!-- Open Graph Tags (for Home page) -->
+    {title === 'Home' && (
+      <>
+        <meta property="og:title" content={siteConfig.siteName} />
+        <meta property="og:description" content={siteConfig.siteDescription} />
+        <meta property="og:url" content={siteConfig.siteUrl} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content={siteConfig.siteName} />
+      </>
+    )}
+    
+    <!-- WhatsApp Integration -->
+    <link rel="preconnect" href="https://wa.me" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <a href="/">
+              <h1>{siteConfig.siteName}</h1>
+            </a>
+          </div>
+          
+          <nav class="nav">
+            <ul class="nav-list">
+              <li><a href="/" class="nav-link">Home</a></li>
+              <li><a href="/classes" class="nav-link">Classes</a></li>
+              <li><a href="/playgym" class="nav-link">Playgym</a></li>
+              <li><a href="/opengym" class="nav-link">Open Gym</a></li>
+              <li><a href="/parties" class="nav-link">Parties</a></li>
+              <li><a href="/about" class="nav-link">About</a></li>
+              <li><a href="/contact" class="nav-link">Contact</a></li>
+              <li><a href="/school-holidays" class="nav-link">Holidays</a></li>
+              <li><a href="/policies" class="nav-link">Policies</a></li>
+            </ul>
+          </nav>
+          
+          <div class="header-actions">
+            <a 
+              href={`https://wa.me/${siteConfig.phone}?text=${siteConfig.whatsappMessage}`}
+              class="whatsapp-btn"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Contact us on WhatsApp"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+              </svg>
+              WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>{siteConfig.siteName}</h3>
+            <p>Premier gymnastics training facility for all ages.</p>
+          </div>
+          
+          <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="/classes">Classes</a></li>
+              <li><a href="/playgym">Playgym</a></li>
+              <li><a href="/opengym">Open Gym</a></li>
+              <li><a href="/parties">Parties</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-section">
+            <h4>Information</h4>
+            <ul>
+              <li><a href="/about">About Us</a></li>
+              <li><a href="/contact">Contact</a></li>
+              <li><a href="/school-holidays">School Holidays</a></li>
+              <li><a href="/policies">Policies</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-section">
+            <h4>Contact</h4>
+            <a 
+              href={`https://wa.me/${siteConfig.phone}?text=${siteConfig.whatsappMessage}`}
+              class="whatsapp-btn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+              </svg>
+              WhatsApp
+            </a>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <p>&copy; 2024 {siteConfig.siteName}. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  :root {
+    --primary-color: #667eea;
+    --secondary-color: #764ba2;
+    --accent-color: #ff6b6b;
+    --text-color: #333;
+    --text-light: #666;
+    --bg-light: #f8f9fa;
+    --white: #ffffff;
+    --border-color: #e9ecef;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  /* Header Styles */
+  .header {
+    background: var(--white);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+  }
+
+  .logo h1 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    font-weight: 700;
+  }
+
+  .logo a {
+    text-decoration: none;
+  }
+
+  .nav-list {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+  }
+
+  .nav-link {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--primary-color);
+  }
+
+  .whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #25d366;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .whatsapp-btn:hover {
+    background: #128c7e;
+    transform: translateY(-2px);
+  }
+
+  /* Footer Styles */
+  .footer {
+    background: var(--text-color);
+    color: var(--white);
+    padding: 3rem 0 1rem;
+    margin-top: 4rem;
+  }
+
+  .footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .footer-section h3,
+  .footer-section h4 {
+    margin-bottom: 1rem;
+    color: var(--white);
+  }
+
+  .footer-section ul {
+    list-style: none;
+  }
+
+  .footer-section ul li {
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-section a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-section a:hover {
+    color: var(--white);
+  }
+
+  .footer-bottom {
+    border-top: 1px solid #555;
+    padding-top: 1rem;
+    text-align: center;
+    color: #ccc;
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .header-content {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .nav-list {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .header-actions {
+      order: -1;
+    }
+  }
+</style>

@@ -1,0 +1,145 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Classes" description="Structured gymnastics classes for all skill levels and ages at Trident Gymnastics.">
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <h1>Gymnastics Classes</h1>
+        <p>Structured gymnastics classes for all skill levels and ages</p>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container">
+        <div class="class-grid">
+          <div class="class-card">
+            <h3>Beginner Classes</h3>
+            <p>Perfect for those new to gymnastics. Learn basic skills and build confidence in a supportive environment.</p>
+            <ul>
+              <li>Ages 3-5: Parent & Child</li>
+              <li>Ages 5-8: Beginner</li>
+              <li>Ages 8-12: Junior Beginner</li>
+            </ul>
+          </div>
+          
+          <div class="class-card">
+            <h3>Intermediate Classes</h3>
+            <p>For gymnasts ready to advance their skills and learn more complex movements.</p>
+            <ul>
+              <li>Ages 6-10: Intermediate</li>
+              <li>Ages 10-14: Junior Intermediate</li>
+              <li>Ages 14+: Senior Intermediate</li>
+            </ul>
+          </div>
+          
+          <div class="class-card">
+            <h3>Advanced Classes</h3>
+            <p>Elite training for serious gymnasts looking to compete or perfect their technique.</p>
+            <ul>
+              <li>Ages 8-12: Advanced</li>
+              <li>Ages 12-16: Elite</li>
+              <li>Ages 16+: Senior Elite</li>
+            </ul>
+          </div>
+          
+          <div class="class-card">
+            <h3>Adult Classes</h3>
+            <p>Never too late to start! Adult classes for fitness, fun, and skill development.</p>
+            <ul>
+              <li>Ages 18+: Adult Beginner</li>
+              <li>Ages 18+: Adult Intermediate</li>
+              <li>Ages 18+: Adult Advanced</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="cta-section">
+          <h2>Ready to Get Started?</h2>
+          <p>Contact us to find the perfect class for you or your child.</p>
+          <a href="/contact" class="btn btn-primary">Contact Us</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .page-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 3rem 0;
+    text-align: center;
+  }
+
+  .page-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .content {
+    padding: 4rem 0;
+  }
+
+  .class-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .class-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+  }
+
+  .class-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .class-card ul {
+    list-style: none;
+    margin-top: 1rem;
+  }
+
+  .class-card li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .class-card li:last-child {
+    border-bottom: none;
+  }
+
+  .cta-section {
+    text-align: center;
+    background: var(--bg-light);
+    padding: 3rem;
+    border-radius: 1rem;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary {
+    background: var(--accent-color);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: #ff5252;
+    transform: translateY(-2px);
+  }
+</style>

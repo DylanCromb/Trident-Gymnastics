@@ -1,0 +1,157 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Open Gym" description="Practice your skills during our open gym sessions at Trident Gymnastics.">
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <h1>Open Gym</h1>
+        <p>Practice your skills during our open gym sessions</p>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container">
+        <div class="info-grid">
+          <div class="info-card">
+            <h3>What is Open Gym?</h3>
+            <p>Open Gym provides gymnasts with supervised access to our equipment for independent practice. Perfect for working on specific skills, conditioning, or just staying active!</p>
+          </div>
+          
+          <div class="info-card">
+            <h3>Requirements</h3>
+            <ul>
+              <li>Must be 8 years or older</li>
+              <li>Previous gymnastics experience required</li>
+              <li>Safety orientation completed</li>
+              <li>Parent/guardian waiver signed</li>
+            </ul>
+          </div>
+          
+          <div class="info-card">
+            <h3>Schedule</h3>
+            <ul>
+              <li><strong>Monday - Friday:</strong> 4:00 PM - 6:00 PM</li>
+              <li><strong>Saturday:</strong> 1:00 PM - 3:00 PM</li>
+              <li><strong>Sunday:</strong> 5:00 PM - 7:00 PM</li>
+            </ul>
+          </div>
+          
+          <div class="info-card">
+            <h3>Pricing</h3>
+            <ul>
+              <li><strong>Single Session:</strong> $20 per person</li>
+              <li><strong>10-Session Pass:</strong> $160 (Save $40!)</li>
+              <li><strong>Monthly Unlimited:</strong> $100</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="safety-section">
+          <h2>Safety First</h2>
+          <p>All participants must follow our safety guidelines and listen to our supervising coaches. Equipment usage is monitored to ensure everyone's safety.</p>
+        </div>
+        
+        <div class="cta-section">
+          <h2>Ready to Practice?</h2>
+          <p>Contact us to schedule your safety orientation and get started!</p>
+          <a href="/contact" class="btn btn-primary">Contact Us</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .page-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 3rem 0;
+    text-align: center;
+  }
+
+  .page-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .content {
+    padding: 4rem 0;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .info-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+  }
+
+  .info-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .info-card ul {
+    list-style: none;
+    margin-top: 1rem;
+  }
+
+  .info-card li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .info-card li:last-child {
+    border-bottom: none;
+  }
+
+  .safety-section {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    padding: 2rem;
+    border-radius: 1rem;
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  .safety-section h2 {
+    color: #856404;
+    margin-bottom: 1rem;
+  }
+
+  .cta-section {
+    text-align: center;
+    background: var(--bg-light);
+    padding: 3rem;
+    border-radius: 1rem;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary {
+    background: var(--accent-color);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: #ff5252;
+    transform: translateY(-2px);
+  }
+</style>

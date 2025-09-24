@@ -1,0 +1,12 @@
+# This file is used to configure TypeScript for the Astro project.
+# For more information, see: https://astro.build/tsconfig
+
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
