@@ -26,6 +26,20 @@ function formatDate(dateString: string): string {
 
 // Get current date for highlighting
 const today = new Date();
+
+// Helper function to check if holiday is current or upcoming
+function getHolidayStatus(holiday: any) {
+  const holidayStart = new Date(holiday.start);
+  const holidayEnd = new Date(holiday.end);
+  const todayTime = today.getTime();
+  const startTime = holidayStart.getTime();
+  const endTime = holidayEnd.getTime();
+  
+  return {
+    isCurrent: startTime <= todayTime && endTime >= todayTime,
+    isUpcoming: startTime > todayTime
+  };
+}
 ---
 
 <Layout title="School Holidays" description="School holiday programs and schedules at Trident Gymnastics.">
@@ -46,11 +60,10 @@ const today = new Date();
 
         <div class="holidays-grid">
           {sortedHolidays.map((holiday: any) => {
-            const isCurrent = new Date(holiday.start) <= today && new Date(holiday.end) >= today;
-            const isUpcoming = new Date(holiday.start) > today;
+            const status = getHolidayStatus(holiday);
             
             return (
-              <div class={`holiday-card ${isCurrent ? 'current' : ''} ${isUpcoming ? 'upcoming' : ''}`}>
+              <div class={`holiday-card ${status.isCurrent ? 'current' : ''} ${status.isUpcoming ? 'upcoming' : ''}`}>
                 <div class="holiday-header">
                   <div class="season-badge season-{holiday.season.toLowerCase()}">
                     {holiday.season}

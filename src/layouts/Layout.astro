@@ -24,13 +24,13 @@ const fullTitle = title === 'Home' ? siteConfig.siteName : `${title} | ${siteCon
     
     <!-- Open Graph Tags (for Home page) -->
     {title === 'Home' && (
-      <>
+      <Fragment>
         <meta property="og:title" content={siteConfig.siteName} />
         <meta property="og:description" content={siteConfig.siteDescription} />
         <meta property="og:url" content={siteConfig.siteUrl} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={siteConfig.siteName} />
-      </>
+      </Fragment>
     )}
     
     <!-- WhatsApp Integration -->
