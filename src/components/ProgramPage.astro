@@ -1,0 +1,56 @@
+---
+interface Level { 
+  name: string; 
+  age?: string; 
+  description?: string; 
+  icon?: string; 
+}
+
+const { title, blurb, heroImage, levels = [], bookingUrl, trialUrl } = Astro.props;
+
+import Layout from "../layouts/Layout.astro";
+import "../styles/program.css";
+---
+
+<Layout title={title} description={`${title} at Trident Gymnastics`}>
+  <section class={`program-hero ${heroImage ? "with-img" : "with-grad"}`} style={heroImage ? `--hero:url(${heroImage})` : ""}>
+    <div class="container">
+      <h1>{title}</h1>
+      <p class="lead">{blurb}</p>
+      <div class="cta-row">
+        <a class="btn btn-accent" href={bookingUrl} target="_blank" rel="noopener">Make a Booking</a>
+        {trialUrl && <a class="btn" href={trialUrl} target="_blank" rel="noopener">Book a Free Trial</a>}
+      </div>
+    </div>
+  </section>
+
+  <section class="levels">
+    <div class="container">
+      <h2>Levels</h2>
+      <div class="level-grid">
+        {levels.map((L) => (
+          <article class="card level-card">
+            {L.icon && <img class="level-icon" src={L.icon} alt={`${L.name} icon`} />}
+            <h3>{L.name}</h3>
+            {L.age && <p class="muted">{L.age}</p>}
+            {L.description && <p>{L.description}</p>}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="trial-nudge">
+    <div class="container">
+      <div class="nudge card">
+        <div>
+          <h3>Try a Free Class</h3>
+          <p class="muted">Not sure which level fits? Book a free trial and we'll place your child in the right class.</p>
+        </div>
+        <div>
+          <a class="btn btn-accent" href={trialUrl ?? bookingUrl} target="_blank" rel="noopener">Book Free Trial</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

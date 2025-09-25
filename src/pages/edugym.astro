@@ -1,0 +1,15 @@
+---
+import ProgramPage from "../components/ProgramPage.astro";
+
+const title = "EduGym";
+const blurb = "Curriculum-aligned gymnastic movement designed for school groups and physical literacy.";
+const bookingUrl = "https://YOUR-BOOKING-LINK/edugym";
+const trialUrl = "https://YOUR-BOOKING-LINK/free-trial";
+const levels = [
+  { name: "Beginner", description: "Core shapes, rolls and landings building safe foundation skills.", icon: "/images/levels/edugym-levels.svg" },
+  { name: "Intermediate", description: "Develop strength and technique across apparatus with progressions." },
+  { name: "Advanced", description: "Refine skills, sequences and confidence for performance and comps." }
+];
+---
+
+<ProgramPage {title} {blurb} {levels} {bookingUrl} {trialUrl} />

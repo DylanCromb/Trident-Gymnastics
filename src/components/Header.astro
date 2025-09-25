@@ -29,7 +29,7 @@ function isActiveLink(href: string): boolean {
 }
 
 // Check if Classes dropdown should be active
-const classesPages = ['/juniorgym', '/edugym', '/urbangym', '/squad'];
+const classesPages = ['/juniorgym', '/edugym', '/urbangym', '/agc'];
 const isClassesActive = classesPages.some(page => currentPath.startsWith(page));
 ---
 
@@ -51,7 +51,7 @@ const isClassesActive = classesPages.some(page => currentPath.startsWith(page));
             <li role="none"><a role="menuitem" href="/juniorgym">JuniorGym</a></li>
             <li role="none"><a role="menuitem" href="/edugym">EduGym</a></li>
             <li role="none"><a role="menuitem" href="/urbangym">UrbanGym</a></li>
-            <li role="none"><a role="menuitem" href="/squad">Trident Squad</a></li>
+            <li role="none"><a role="menuitem" href="/agc">AGC</a></li>
           </ul>
         </li>
         <li><a href="/playgym" class={isActiveLink('/playgym') ? 'active' : ''}>PlayGym</a></li>

@@ -1,0 +1,15 @@
+---
+import ProgramPage from "../components/ProgramPage.astro";
+
+const title = "UrbanGym";
+const blurb = "Parkour-inspired movement—vault, swing, climb and flow in a safe coached environment.";
+const bookingUrl = "https://YOUR-BOOKING-LINK/urbangym";
+const trialUrl = "https://YOUR-BOOKING-LINK/free-trial";
+const levels = [
+  { name: "Rookie", description: "Intro to vaults, wall runs and safe landings.", icon: "/images/levels/urbangym-levels.svg" },
+  { name: "Flow", description: "Link movements with control and style across obstacles." },
+  { name: "Pro", description: "Power, precision and creativity with advanced challenges." }
+];
+---
+
+<ProgramPage {title} {blurb} {levels} {bookingUrl} {trialUrl} />
