@@ -83,6 +83,18 @@
   padding: 20px 0 60px; 
 }
 
+.levels-diagram {
+  padding: 40px 0;
+  text-align: center;
+}
+
+.levels-diagram img {
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+}
+
 .nudge{ 
   display: flex; 
   justify-content: space-between; 

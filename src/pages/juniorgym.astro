@@ -6,6 +6,7 @@ const blurb = "Structured gymnastics for our youngest athletes: movement, coordi
 const bookingUrl = "https://YOUR-BOOKING-LINK/juniorgym";
 const trialUrl = "https://YOUR-BOOKING-LINK/free-trial";
 const heroImage = "/images/hero-juniorgym.jpg"; // optional; remove if not available
+const diagramImage = "/images/levels/juniorgym-levels.svg";
 const levels = [
   { name: "JuniorGym 2–3", age: "Ages 2–3", description: "Parent-assisted exploratory gymnastics building balance and confidence.", icon: "/images/levels/juniorgym-levels.svg" },
   { name: "JuniorGym 3–4", age: "Ages 3–4", description: "Independent class introducing shapes, landings and safe movement." },
@@ -13,4 +14,4 @@ const levels = [
 ];
 ---
 
-<ProgramPage {title} {blurb} {levels} {bookingUrl} {trialUrl} heroImage={heroImage} />
+<ProgramPage {title} {blurb} {levels} {bookingUrl} {trialUrl} heroImage={heroImage} diagramImage={diagramImage} />

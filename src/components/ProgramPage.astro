@@ -6,7 +6,7 @@ interface Level {
   icon?: string; 
 }
 
-const { title, blurb, heroImage, levels = [], bookingUrl, trialUrl } = Astro.props;
+const { title, blurb, heroImage, levels = [], bookingUrl, trialUrl, diagramImage } = Astro.props;
 
 import Layout from "../layouts/Layout.astro";
 import "../styles/program.css";
@@ -39,6 +39,14 @@ import "../styles/program.css";
       </div>
     </div>
   </section>
+
+  {diagramImage && (
+    <section class="levels-diagram">
+      <div class="container">
+        <img src={diagramImage} alt={`${title} levels diagram`} />
+      </div>
+    </section>
+  )}
 
   <section class="trial-nudge">
     <div class="container">
