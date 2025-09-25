@@ -34,146 +34,57 @@ const isClassesActive = classesPages.some(page => currentPath.startsWith(page));
 ---
 
 <header class="site-header">
-  <div class="wrap">
-    <nav class="nav-left" aria-label="Primary left">
-      <div class="nav-item dropdown">
-        <button 
-          class={`nav-btn dropdown-toggle ${isClassesActive ? 'active' : ''}`}
-          aria-expanded="false" 
-          aria-haspopup="true"
-          id="classes-dropdown"
-        >
-          Classes
-          <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
-            <path d="M6 8L2 4h8l-4 4z"/>
-          </svg>
-        </button>
-        <ul class="submenu dropdown-menu" role="menu" aria-labelledby="classes-dropdown">
-          <li role="none">
-            <a href="/juniorgym" class="dropdown-link" role="menuitem">JuniorGym</a>
-          </li>
-          <li role="none">
-            <a href="/edugym" class="dropdown-link" role="menuitem">EduGym</a>
-          </li>
-          <li role="none">
-            <a href="/urbangym" class="dropdown-link" role="menuitem">UrbanGym</a>
-          </li>
-          <li role="none">
-            <a href="/squad" class="dropdown-link" role="menuitem">Trident Squad</a>
-          </li>
-        </ul>
-      </div>
-      
-      <a href="/playgym" class={`nav-link ${isActiveLink('/playgym') ? 'active' : ''}`}>PlayGym</a>
-      <a href="/school-holidays" class={`nav-link ${isActiveLink('/school-holidays') ? 'active' : ''}`}>Holiday Program</a>
-    </nav>
-
-    <a class="logo" href="/" aria-label="Trident Gymnastics Home">
+  <div class="logo-wrap">
+    <a href="/" class="logo" aria-label="Trident Gymnastics Home">
       <img src={primaryLogoUrl} alt="Trident Gymnastics" />
     </a>
-
-    <nav class="nav-right" aria-label="Primary right">
-      <a href="/parties" class={`nav-link ${isActiveLink('/parties') ? 'active' : ''}`}>Birthday Parties</a>
-      <a href="/dates" class={`nav-link ${isActiveLink('/dates') ? 'active' : ''}`}>Dates</a>
-      <a href="/about" class={`nav-link ${isActiveLink('/about') ? 'active' : ''}`}>About</a>
-      <a href="/contact" class={`nav-link ${isActiveLink('/contact') ? 'active' : ''}`}>Customer Portal</a>
-    </nav>
-
-    <button class="hamburger" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </button>
   </div>
-
-  <div id="mobile-nav" class="mobile-drawer" hidden>
-    <div class="mobile-nav-content">
-      <div class="mobile-nav-item">
-        <button class="mobile-nav-link mobile-dropdown-toggle" aria-expanded="false">
-          Classes
-          <svg class="mobile-dropdown-arrow" width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
-            <path d="M6 8L2 4h8l-4 4z"/>
-          </svg>
+  <nav class="main-nav" aria-label="Main">
+    <ul>
+      <li class="has-submenu">
+        <button class={`nav-btn ${isClassesActive ? 'active' : ''}`}>
+          Classes ▾
         </button>
-        <div class="mobile-dropdown-menu">
-          <a href="/juniorgym" class="mobile-dropdown-link">JuniorGym</a>
-          <a href="/edugym" class="mobile-dropdown-link">EduGym</a>
-          <a href="/urbangym" class="mobile-dropdown-link">UrbanGym</a>
-          <a href="/squad" class="mobile-dropdown-link">Trident Squad</a>
-        </div>
-      </div>
-      
-      <a href="/playgym" class="mobile-nav-link">PlayGym</a>
-      <a href="/school-holidays" class="mobile-nav-link">Holiday Program</a>
-      <a href="/parties" class="mobile-nav-link">Birthday Parties</a>
-      <a href="/dates" class="mobile-nav-link">Dates</a>
-      <a href="/about" class="mobile-nav-link">About</a>
-      <a href="/contact" class="mobile-nav-link">Customer Portal</a>
-    </div>
-  </div>
+        <ul class="submenu">
+          <li><a href="/juniorgym">JuniorGym</a></li>
+          <li><a href="/edugym">EduGym</a></li>
+          <li><a href="/urbangym">UrbanGym</a></li>
+          <li><a href="/squad">Trident Squad</a></li>
+        </ul>
+      </li>
+      <li><a href="/playgym" class={isActiveLink('/playgym') ? 'active' : ''}>PlayGym</a></li>
+      <li><a href="/school-holidays" class={isActiveLink('/school-holidays') ? 'active' : ''}>Holiday Program</a></li>
+      <li><a href="/parties" class={isActiveLink('/parties') ? 'active' : ''}>Birthday Parties</a></li>
+      <li><a href="/dates" class={isActiveLink('/dates') ? 'active' : ''}>Dates</a></li>
+      <li><a href="/about" class={isActiveLink('/about') ? 'active' : ''}>About</a></li>
+      <li><a href="/contact" class={isActiveLink('/contact') ? 'active' : ''}>Customer Portal</a></li>
+    </ul>
+  </nav>
 </header>
 
 <script>
   // Dropdown functionality
   document.addEventListener('DOMContentLoaded', function() {
-    const dropdownToggle = document.querySelector('.dropdown-toggle');
-    const dropdownMenu = document.querySelector('.dropdown-menu');
-    const mobileMenuToggle = document.querySelector('.hamburger');
-    const mobileNav = document.querySelector('.mobile-drawer');
-    const mobileDropdownToggle = document.querySelector('.mobile-dropdown-toggle');
-    const mobileDropdownMenu = document.querySelector('.mobile-dropdown-menu');
+    const navBtn = document.querySelector('.nav-btn');
+    const submenu = document.querySelector('.submenu');
 
     // Desktop dropdown
-    if (dropdownToggle && dropdownMenu) {
-      dropdownToggle.addEventListener('mouseenter', () => {
-        dropdownToggle.setAttribute('aria-expanded', 'true');
-        dropdownMenu.classList.add('show');
+    if (navBtn && submenu) {
+      navBtn.addEventListener('mouseenter', () => {
+        submenu.style.display = 'block';
       });
 
-      dropdownToggle.addEventListener('mouseleave', () => {
-        dropdownToggle.setAttribute('aria-expanded', 'false');
-        dropdownMenu.classList.remove('show');
+      navBtn.addEventListener('mouseleave', () => {
+        submenu.style.display = 'none';
       });
 
-      dropdownToggle.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          const isExpanded = dropdownToggle.getAttribute('aria-expanded') === 'true';
-          dropdownToggle.setAttribute('aria-expanded', !isExpanded);
-          dropdownMenu.classList.toggle('show', !isExpanded);
-        }
+      // Keep dropdown open when hovering over it
+      submenu.addEventListener('mouseenter', () => {
+        submenu.style.display = 'block';
       });
 
-      // Close dropdown when clicking outside
-      document.addEventListener('click', (e) => {
-        if (!dropdownToggle.contains(e.target)) {
-          dropdownToggle.setAttribute('aria-expanded', 'false');
-          dropdownMenu.classList.remove('show');
-        }
-      });
-
-      // Close dropdown on Escape key
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          dropdownToggle.setAttribute('aria-expanded', 'false');
-          dropdownMenu.classList.remove('show');
-        }
-      });
-    }
-
-    // Mobile menu toggle
-    if (mobileMenuToggle && mobileNav) {
-      mobileMenuToggle.addEventListener('click', () => {
-        const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
-        mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
-        mobileNav.hidden = isExpanded;
-      });
-    }
-
-    // Mobile dropdown
-    if (mobileDropdownToggle && mobileDropdownMenu) {
-      mobileDropdownToggle.addEventListener('click', () => {
-        const isExpanded = mobileDropdownToggle.getAttribute('aria-expanded') === 'true';
-        mobileDropdownToggle.setAttribute('aria-expanded', !isExpanded);
-        mobileDropdownMenu.classList.toggle('show', !isExpanded);
+      submenu.addEventListener('mouseleave', () => {
+        submenu.style.display = 'none';
       });
     }
   });
