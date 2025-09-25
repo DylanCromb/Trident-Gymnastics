@@ -44,16 +44,13 @@ const isClassesActive = classesPages.some(page => currentPath.startsWith(page));
     <nav class="main-nav" aria-label="Main">
       <ul class="nav-list">
         <li class="has-submenu">
-          <button class={`nav-btn ${isClassesActive ? 'active' : ''}`} type="button" aria-expanded="false" aria-controls="nav-classes">
-            Classes
-          </button>
+          <a href="/classes" class={`nav-link ${isClassesActive ? 'active' : ''}`} aria-haspopup="true" aria-controls="nav-classes">Classes</a>
+          <button class="nav-caret" type="button" aria-expanded="false" aria-controls="nav-classes" aria-label="Open Classes menu">▾</button>
           <ul id="nav-classes" class="submenu" role="menu">
             <li role="none"><a role="menuitem" href="/juniorgym">JuniorGym</a></li>
             <li role="none"><a role="menuitem" href="/edugym">EduGym</a></li>
             <li role="none"><a role="menuitem" href="/urbangym">UrbanGym</a></li>
             <li role="none"><a role="menuitem" href="/agc">AGC</a></li>
-            <li role="separator" class="submenu-divider"></li>
-            <li role="none"><a role="menuitem" href="/classes">All Classes</a></li>
           </ul>
         </li>
         <li><a href="/playgym" class={isActiveLink('/playgym') ? 'active' : ''}>PlayGym</a></li>
@@ -67,75 +64,6 @@ const isClassesActive = classesPages.some(page => currentPath.startsWith(page));
   </div>
 </header>
 
-<script>
-  // Enhanced dropdown functionality
-  document.addEventListener('DOMContentLoaded', function() {
-    const navBtn = document.querySelector('.nav-btn');
-    const submenu = document.querySelector('.submenu');
-    const hasSubmenu = document.querySelector('.has-submenu');
-
-    if (navBtn && submenu && hasSubmenu) {
-      // Click to toggle
-      navBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const isOpen = navBtn.getAttribute('aria-expanded') === 'true';
-        navBtn.setAttribute('aria-expanded', !isOpen);
-        submenu.classList.toggle('open', !isOpen);
-      });
-
-      // Keyboard navigation
-      navBtn.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowDown') {
-          e.preventDefault();
-          const firstItem = submenu.querySelector('a[role="menuitem"]');
-          if (firstItem) {
-            firstItem.focus();
-            navBtn.setAttribute('aria-expanded', 'true');
-            submenu.classList.add('open');
-          }
-        }
-      });
-
-      // Submenu keyboard navigation
-      submenu.addEventListener('keydown', (e) => {
-        const items = Array.from(submenu.querySelectorAll('a[role="menuitem"]'));
-        const currentIndex = items.indexOf(e.target);
-
-        switch (e.key) {
-          case 'ArrowDown':
-            e.preventDefault();
-            const nextIndex = (currentIndex + 1) % items.length;
-            items[nextIndex].focus();
-            break;
-          case 'ArrowUp':
-            e.preventDefault();
-            const prevIndex = currentIndex === 0 ? items.length - 1 : currentIndex - 1;
-            items[prevIndex].focus();
-            break;
-          case 'Escape':
-            navBtn.focus();
-            navBtn.setAttribute('aria-expanded', 'false');
-            submenu.classList.remove('open');
-            break;
-        }
-      });
-
-      // Close on outside click
-      document.addEventListener('click', (e) => {
-        if (!hasSubmenu.contains(e.target)) {
-          navBtn.setAttribute('aria-expanded', 'false');
-          submenu.classList.remove('open');
-        }
-      });
-
-      // Close on Escape
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && submenu.classList.contains('open')) {
-          navBtn.focus();
-          navBtn.setAttribute('aria-expanded', 'false');
-          submenu.classList.remove('open');
-        }
-      });
-    }
-  });
+<script is:raw>
+  import("/src/scripts/nav-dropdown.ts").then(m => m.setupNavDropdown());
 </script>

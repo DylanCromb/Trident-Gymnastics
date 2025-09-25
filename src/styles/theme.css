@@ -191,32 +191,67 @@ input:focus,select:focus,textarea:focus{ outline:2px solid var(--color-primary);
 /* Keep the dropdown attached and above content */
 .has-submenu { 
   position: relative;
-  padding-block-start: 6px; /* hover pad to prevent flicker */
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  --bridge: 6px;
 }
 
+.nav-link, .nav-caret {
+  display: inline-flex;
+  align-items: center;
+  height: 44px;
+  font: inherit;
+  font-weight: 600;
+  color: var(--color-secondary);
+  background: none;
+  border: 0;
+  padding: 0 6px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.nav-link:hover, .nav-caret:hover { 
+  color: var(--color-primary); 
+}
+
+/* The dropdown panel */
 .submenu {
   position: absolute;
   top: calc(100% + 8px);
   left: 0;
+  min-width: 220px;
   background: var(--color-white);
   border: 1px solid var(--border-subtle);
   box-shadow: var(--shadow-2);
   padding: 8px 0;
-  min-width: 220px;
   display: none;
-  z-index: 30;
+  z-index: 40;
 }
 
+/* Hover/focus keep-open (bridge any small gaps) */
 .has-submenu:hover .submenu,
 .has-submenu:focus-within .submenu,
-.has-submenu .submenu.open { 
+.has-submenu.open .submenu { 
   display: block; 
+}
+
+/* Optional "hover bridge" to prevent tiny gaps causing close */
+.has-submenu .submenu::before {
+  content: "";
+  position: absolute;
+  top: calc(-1 * var(--bridge));
+  left: 0;
+  right: 0;
+  height: var(--bridge);
+  background: transparent; /* expands hover area upward */
 }
 
 .submenu a { 
   display: block; 
   padding: 8px 14px; 
   white-space: nowrap; 
+  color: var(--color-secondary);
 }
 
 .submenu a:hover { 
@@ -224,10 +259,11 @@ input:focus,select:focus,textarea:focus{ outline:2px solid var(--color-primary);
   color: var(--color-secondary); 
 }
 
-.submenu-divider {
-  height: 1px;
-  background: var(--border-subtle);
-  margin: 4px 0;
+/* Caret alignment with baseline */
+.nav-caret { 
+  line-height: 1; 
+  font-size: .9em; 
+  padding-left: 2px; 
 }
 
 .nav-link {
