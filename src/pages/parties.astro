@@ -1,38 +1,39 @@
 ---
-// src/pages/parties.astro
 import Layout from "../layouts/Layout.astro";
 import "../styles/parties.css";
 
 const bookingUrl = "https://trident-gymnastics.customer-portal.com/parties"; // Customer Portal booking link
-const inviteHref = "/files/party-invitation.pdf";    // TODO: place this file in /public/files/
+const inviteHref = "/files/party-invitation.pdf";    // TODO: ensure file exists
 ---
 
 <Layout title="Birthday Parties" description="Celebrate at Trident with gymnastics-based parties.">
-  <!-- HERO -->
-  <section class="party-hero">
+
+  <!-- HERO: background image + overlay + CTA -->
+  <section class="party-hero" role="region" aria-label="Birthday Parties hero">
     <div class="container">
       <h1>Birthday Parties</h1>
-      <p class="lead">
-        Party with us! Qualified coaches, movement games and a safe facility for an unforgettable celebration.
-      </p>
+      <p class="lead">Party with us! Qualified coaches, movement games, and a safe facility for an unforgettable celebration.</p>
       <a class="btn btn-accent" href={bookingUrl} target="_blank" rel="noopener">Book Now</a>
     </div>
   </section>
 
-  <!-- THEMES -->
-  <section class="party-types" id="themes">
+  <!-- THEMES: three cards w/ icons -->
+  <section class="party-types section-band" id="themes" aria-labelledby="themes-title">
     <div class="container">
-      <h2>Party Themes</h2>
+      <h2 id="themes-title">Party Themes</h2>
       <div class="types-grid">
-        <article class="card">
+        <article class="card type-card">
+          <img class="type-icon" src="/images/icons/opengym.svg" alt="" aria-hidden="true" />
           <h3>OpenGym Party</h3>
           <p>Explore the gym at your own pace with coach-led games and supervised free time.</p>
         </article>
-        <article class="card">
+        <article class="card type-card">
+          <img class="type-icon" src="/images/icons/gymnastics.svg" alt="" aria-hidden="true" />
           <h3>Gymnastics Party</h3>
           <p>Vault, bars, beam and floor with fun skill circuits, stations and team games.</p>
         </article>
-        <article class="card">
+        <article class="card type-card">
+          <img class="type-icon" src="/images/icons/urbangym.svg" alt="" aria-hidden="true" />
           <h3>UrbanGym Party</h3>
           <p>Obstacle flow, climbs and vaults with a parkour-inspired twist—safe, coached and epic.</p>
         </article>
@@ -40,40 +41,43 @@ const inviteHref = "/files/party-invitation.pdf";    // TODO: place this file in
     </div>
   </section>
 
-  <!-- FORMAT / TIMES / PRICING -->
-  <section class="party-details" id="details">
+  <!-- PRICING & FORMAT: callout box -->
+  <section class="party-details" id="details" aria-labelledby="details-title">
     <div class="container">
-      <h2>Format, Times & Pricing</h2>
-      <ul class="details-list">
-        <li>Session length: 2 hours (venue access total ~2.5 hours)</li>
-        <li>Setup/pack-up: 15 minutes either side</li>
-        <li>Typical slot: Saturdays 2:00pm – 4:00pm (subject to availability)</li>
-        <li>1–10 participants: $350</li>
-        <li>11–20 participants: $450</li>
-        <li>21–30 participants: $550</li>
-        <li>31–40 participants: $650</li>
-        <li>$50 non-refundable deposit required at booking</li>
-        <li>Balance due by COB Monday of party week</li>
-      </ul>
+      <h2 id="details-title">Format, Times & Pricing</h2>
 
-      <div class="cta-row">
-        <a class="btn btn-accent" href={bookingUrl} target="_blank" rel="noopener">Book Now</a>
+      <div class="callout">
+        <ul class="details-list">
+          <li>Session length: 2 hours (venue access total ~2.5 hours)</li>
+          <li>Setup/pack-up: 15 minutes either side</li>
+          <li>Typical slot: Saturdays 2:00pm – 4:00pm (subject to availability)</li>
+          <li>1–10 participants: $350</li>
+          <li>11–20 participants: $450</li>
+          <li>21–30 participants: $550</li>
+          <li>31–40 participants: $650</li>
+          <li>$50 non-refundable deposit required at booking</li>
+          <li>Balance due by COB Monday of party week</li>
+        </ul>
+        <div class="cta-row">
+          <a class="btn btn-accent" href={bookingUrl} target="_blank" rel="noopener">Book Now</a>
+        </div>
       </div>
+
     </div>
   </section>
 
-  <!-- EXTRAS & INVITATION -->
-  <section class="party-extras" id="extras">
+  <!-- EXTRAS & INVITATION: band + button style -->
+  <section class="party-extras section-band" id="extras" aria-labelledby="extras-title">
     <div class="container">
-      <h2>Extras & Notes</h2>
+      <h2 id="extras-title">Extras & Notes</h2>
       <ul class="notes-list">
         <li>Food, decorations & cutlery: BYO (tables & chairs provided)</li>
         <li>Limited kitchen access available</li>
-        <li>
-          Invitation template:
-          <a href={inviteHref} download>Download party invitation (PDF)</a>
-        </li>
       </ul>
+      <p class="invite-row">
+        <a class="btn" href={inviteHref} download>Download party invitation (PDF)</a>
+      </p>
     </div>
   </section>
+
 </Layout>
