@@ -1,4 +1,5 @@
 ---
+import "../styles/theme.css";
 import Header from '../components/Header.astro';
 import { readFileSync } from 'fs';
 import { parse } from 'yaml';
@@ -9,7 +10,7 @@ export interface Props {
   description?: string;
 }
 
-const { title, description } = Astro.props;
+const { title = "Trident Gymnastics", description = "" } = Astro.props;
 const { siteConfig } = await import('../config/site');
 const fullTitle = title === 'Home' ? siteConfig.siteName : `${title} | ${siteConfig.siteName}`;
 
@@ -37,7 +38,6 @@ const heroImageUrl = assets.hero_image ? `/uploads/${assets.hero_image}` : null;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="stylesheet" href="/src/styles/theme.css" />
     
     <!-- SEO Meta Tags -->
     <title>{fullTitle}</title>
