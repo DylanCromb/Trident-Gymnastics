@@ -1,219 +1,79 @@
 ---
-import Layout from '../layouts/Layout.astro';
+// src/pages/parties.astro
+import Layout from "../layouts/Layout.astro";
+import "../styles/parties.css";
+
+const bookingUrl = "https://YOUR-BOOKING-LINK-HERE"; // TODO: replace with real link
+const inviteHref = "/files/party-invitation.pdf";    // TODO: place this file in /public/files/
 ---
 
-<Layout title="Parties" description="Celebrate your special day with a gymnastics-themed party at Trident Gymnastics.">
-  <main>
-    <section class="page-header">
-      <div class="container">
-        <h1>Birthday Parties</h1>
-        <p>Celebrate your special day with a gymnastics-themed party</p>
-      </div>
-    </section>
+<Layout title="Birthday Parties" description="Celebrate at Trident with gymnastics-based parties.">
+  <!-- HERO -->
+  <section class="party-hero">
+    <div class="container">
+      <h1>Birthday Parties</h1>
+      <p class="lead">
+        Party with us! Qualified coaches, movement games and a safe facility for an unforgettable celebration.
+      </p>
+      <a class="btn btn-accent" href={bookingUrl} target="_blank" rel="noopener">Book Now</a>
+    </div>
+  </section>
 
-    <section class="content">
-      <div class="container">
-        <div class="info-grid">
-          <div class="info-card">
-            <h3>Party Packages</h3>
-            <ul>
-              <li><strong>Basic Package:</strong> 1.5 hours, up to 15 children - $200</li>
-              <li><strong>Deluxe Package:</strong> 2 hours, up to 20 children - $280</li>
-              <li><strong>Premium Package:</strong> 2.5 hours, up to 25 children - $350</li>
-            </ul>
-          </div>
-          
-          <div class="info-card">
-            <h3>What's Included</h3>
-            <ul>
-              <li>Supervised gymnastics activities</li>
-              <li>Party room with tables and chairs</li>
-              <li>Basic decorations</li>
-              <li>Party coordinator</li>
-              <li>Clean-up service</li>
-            </ul>
-          </div>
-          
-          <div class="info-card">
-            <h3>Add-Ons</h3>
-            <ul>
-              <li><strong>Party Favors:</strong> $5 per child</li>
-              <li><strong>Custom Decorations:</strong> $30</li>
-              <li><strong>Photography:</strong> $50</li>
-              <li><strong>Extra Time:</strong> $50 per hour</li>
-            </ul>
-          </div>
-          
-          <div class="info-card">
-            <h3>Age Groups</h3>
-            <ul>
-              <li><strong>Ages 3-5:</strong> Parent & child activities</li>
-              <li><strong>Ages 6-8:</strong> Guided gymnastics games</li>
-              <li><strong>Ages 9-12:</strong> Skill-based activities</li>
-              <li><strong>Ages 13+:</strong> Advanced challenges</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="booking-section">
-          <h2>Booking Information</h2>
-          <div class="booking-grid">
-            <div class="booking-card">
-              <h3>Available Times</h3>
-              <ul>
-                <li><strong>Saturday:</strong> 10:00 AM, 1:00 PM, 4:00 PM</li>
-                <li><strong>Sunday:</strong> 11:00 AM, 2:00 PM, 5:00 PM</li>
-              </ul>
-            </div>
-            
-            <div class="booking-card">
-              <h3>Booking Requirements</h3>
-              <ul>
-                <li>Minimum 2 weeks advance notice</li>
-                <li>50% deposit required</li>
-                <li>Final headcount 48 hours before</li>
-                <li>Waivers for all participants</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        
-        <div class="cta-section">
-          <h2>Ready to Book?</h2>
-          <p>Contact us to plan your perfect gymnastics party!</p>
-          <a href="/contact" class="btn btn-primary">Book Your Party</a>
-        </div>
+  <!-- THEMES -->
+  <section class="party-types" id="themes">
+    <div class="container">
+      <h2>Party Themes</h2>
+      <div class="types-grid">
+        <article class="card">
+          <h3>OpenGym Party</h3>
+          <p>Explore the gym at your own pace with coach-led games and supervised free time.</p>
+        </article>
+        <article class="card">
+          <h3>Gymnastics Party</h3>
+          <p>Vault, bars, beam and floor with fun skill circuits, stations and team games.</p>
+        </article>
+        <article class="card">
+          <h3>UrbanGym Party</h3>
+          <p>Obstacle flow, climbs and vaults with a parkour-inspired twist—safe, coached and epic.</p>
+        </article>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+
+  <!-- FORMAT / TIMES / PRICING -->
+  <section class="party-details" id="details">
+    <div class="container">
+      <h2>Format, Times & Pricing</h2>
+      <ul class="details-list">
+        <li>Session length: 2 hours (venue access total ~2.5 hours)</li>
+        <li>Setup/pack-up: 15 minutes either side</li>
+        <li>Typical slot: Saturdays 2:00pm – 4:00pm (subject to availability)</li>
+        <li>1–10 participants: $350</li>
+        <li>11–20 participants: $450</li>
+        <li>21–30 participants: $550</li>
+        <li>31–40 participants: $650</li>
+        <li>$50 non-refundable deposit required at booking</li>
+        <li>Balance due by COB Monday of party week</li>
+      </ul>
+
+      <div class="cta-row">
+        <a class="btn btn-accent" href={bookingUrl} target="_blank" rel="noopener">Book Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXTRAS & INVITATION -->
+  <section class="party-extras" id="extras">
+    <div class="container">
+      <h2>Extras & Notes</h2>
+      <ul class="notes-list">
+        <li>Food, decorations & cutlery: BYO (tables & chairs provided)</li>
+        <li>Limited kitchen access available</li>
+        <li>
+          Invitation template:
+          <a href={inviteHref} download>Download party invitation (PDF)</a>
+        </li>
+      </ul>
+    </div>
+  </section>
 </Layout>
-
-<style>
-  .page-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 3rem 0;
-    text-align: center;
-  }
-
-  .page-header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .content {
-    padding: 4rem 0;
-  }
-
-  .info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-bottom: 3rem;
-  }
-
-  .info-card {
-    background: white;
-    padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border: 1px solid var(--border-color);
-  }
-
-  .info-card h3 {
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-  }
-
-  .info-card ul {
-    list-style: none;
-    margin-top: 1rem;
-  }
-
-  .info-card li {
-    padding: 0.5rem 0;
-    border-bottom: 1px solid var(--border-color);
-  }
-
-  .info-card li:last-child {
-    border-bottom: none;
-  }
-
-  .booking-section {
-    background: var(--bg-light);
-    padding: 3rem;
-    border-radius: 1rem;
-    margin-bottom: 3rem;
-  }
-
-  .booking-section h2 {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: var(--text-color);
-  }
-
-  .booking-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-  }
-
-  .booking-card {
-    background: white;
-    padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  .booking-card h3 {
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-    font-size: 1.25rem;
-  }
-
-  .booking-card ul {
-    list-style: none;
-    margin-top: 1rem;
-  }
-
-  .booking-card li {
-    padding: 0.5rem 0;
-    border-bottom: 1px solid var(--border-color);
-  }
-
-  .booking-card li:last-child {
-    border-bottom: none;
-  }
-
-  .cta-section {
-    text-align: center;
-    background: var(--accent-color);
-    color: white;
-    padding: 3rem;
-    border-radius: 1rem;
-  }
-
-  .cta-section h2 {
-    margin-bottom: 1rem;
-  }
-
-  .btn {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-  }
-
-  .btn-primary {
-    background: white;
-    color: var(--accent-color);
-  }
-
-  .btn-primary:hover {
-    background: #f8f9fa;
-    transform: translateY(-2px);
-  }
-</style>
