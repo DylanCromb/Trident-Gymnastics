@@ -1,0 +1,158 @@
+---
+// Header component with centered logo and split navigation
+---
+
+<header class="header">
+  <div class="container">
+    <nav class="nav" role="navigation" aria-label="Main">
+      <div class="nav-left">
+        <div class="nav-item dropdown">
+          <button 
+            class="nav-link dropdown-toggle" 
+            aria-expanded="false" 
+            aria-haspopup="true"
+            id="classes-dropdown"
+          >
+            Classes
+            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+              <path d="M6 8L2 4h8l-4 4z"/>
+            </svg>
+          </button>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="classes-dropdown">
+            <li role="none">
+              <a href="/juniorgym" class="dropdown-link" role="menuitem">JuniorGym</a>
+            </li>
+            <li role="none">
+              <a href="/edugym" class="dropdown-link" role="menuitem">EduGym</a>
+            </li>
+            <li role="none">
+              <a href="/urbangym" class="dropdown-link" role="menuitem">UrbanGym</a>
+            </li>
+            <li role="none">
+              <a href="/squad" class="dropdown-link" role="menuitem">Trident Squad</a>
+            </li>
+          </ul>
+        </div>
+        
+        <a href="/playgym" class="nav-link">PlayGym</a>
+        <a href="/school-holidays" class="nav-link">Holiday Program</a>
+      </div>
+
+      <div class="logo">
+        <a href="/" aria-label="Trident Gymnastics Home">
+          <img src="/images/logo.svg" alt="Trident Gymnastics" class="logo-img" />
+        </a>
+      </div>
+
+      <div class="nav-right">
+        <a href="/parties" class="nav-link">Birthday Parties</a>
+        <a href="/dates" class="nav-link">Dates</a>
+        <a href="/about" class="nav-link">About</a>
+        <a href="/contact" class="nav-link">Customer Portal</a>
+      </div>
+
+      <!-- Mobile hamburger menu -->
+      <button class="mobile-menu-toggle" aria-expanded="false" aria-label="Toggle navigation menu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </nav>
+
+    <!-- Mobile navigation menu -->
+    <div class="mobile-nav" aria-hidden="true">
+      <div class="mobile-nav-content">
+        <div class="mobile-nav-item">
+          <button class="mobile-nav-link mobile-dropdown-toggle" aria-expanded="false">
+            Classes
+            <svg class="mobile-dropdown-arrow" width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+              <path d="M6 8L2 4h8l-4 4z"/>
+            </svg>
+          </button>
+          <div class="mobile-dropdown-menu">
+            <a href="/juniorgym" class="mobile-dropdown-link">JuniorGym</a>
+            <a href="/edugym" class="mobile-dropdown-link">EduGym</a>
+            <a href="/urbangym" class="mobile-dropdown-link">UrbanGym</a>
+            <a href="/squad" class="mobile-dropdown-link">Trident Squad</a>
+          </div>
+        </div>
+        
+        <a href="/playgym" class="mobile-nav-link">PlayGym</a>
+        <a href="/school-holidays" class="mobile-nav-link">Holiday Program</a>
+        <a href="/parties" class="mobile-nav-link">Birthday Parties</a>
+        <a href="/dates" class="mobile-nav-link">Dates</a>
+        <a href="/about" class="mobile-nav-link">About</a>
+        <a href="/contact" class="mobile-nav-link">Customer Portal</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Dropdown functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const dropdownToggle = document.querySelector('.dropdown-toggle');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const mobileNav = document.querySelector('.mobile-nav');
+    const mobileDropdownToggle = document.querySelector('.mobile-dropdown-toggle');
+    const mobileDropdownMenu = document.querySelector('.mobile-dropdown-menu');
+
+    // Desktop dropdown
+    if (dropdownToggle && dropdownMenu) {
+      dropdownToggle.addEventListener('mouseenter', () => {
+        dropdownToggle.setAttribute('aria-expanded', 'true');
+        dropdownMenu.classList.add('show');
+      });
+
+      dropdownToggle.addEventListener('mouseleave', () => {
+        dropdownToggle.setAttribute('aria-expanded', 'false');
+        dropdownMenu.classList.remove('show');
+      });
+
+      dropdownToggle.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const isExpanded = dropdownToggle.getAttribute('aria-expanded') === 'true';
+          dropdownToggle.setAttribute('aria-expanded', !isExpanded);
+          dropdownMenu.classList.toggle('show', !isExpanded);
+        }
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!dropdownToggle.contains(e.target)) {
+          dropdownToggle.setAttribute('aria-expanded', 'false');
+          dropdownMenu.classList.remove('show');
+        }
+      });
+
+      // Close dropdown on Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          dropdownToggle.setAttribute('aria-expanded', 'false');
+          dropdownMenu.classList.remove('show');
+        }
+      });
+    }
+
+    // Mobile menu toggle
+    if (mobileMenuToggle && mobileNav) {
+      mobileMenuToggle.addEventListener('click', () => {
+        const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+        mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
+        mobileNav.setAttribute('aria-hidden', isExpanded);
+        mobileNav.classList.toggle('show', !isExpanded);
+      });
+    }
+
+    // Mobile dropdown
+    if (mobileDropdownToggle && mobileDropdownMenu) {
+      mobileDropdownToggle.addEventListener('click', () => {
+        const isExpanded = mobileDropdownToggle.getAttribute('aria-expanded') === 'true';
+        mobileDropdownToggle.setAttribute('aria-expanded', !isExpanded);
+        mobileDropdownMenu.classList.toggle('show', !isExpanded);
+      });
+    }
+  });
+</script>
