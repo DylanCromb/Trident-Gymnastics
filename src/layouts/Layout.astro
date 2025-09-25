@@ -1,5 +1,7 @@
 ---
 import "../styles/theme.css";
+import "../styles/program.css";
+import "../styles/parties.css";
 import Header from '../components/Header.astro';
 import { readFileSync } from 'fs';
 import { parse } from 'yaml';
@@ -151,7 +153,7 @@ const heroImageUrl = assets.hero_image ? `/uploads/${assets.hero_image}` : null;
   }
 </style>
 
-<script>
+<script type="module" is:inline>
   // Global dropdown initialization for all pages
   import("/src/scripts/nav-dropdown.ts").then(m => m.setupNavDropdown());
 </script>

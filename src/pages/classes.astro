@@ -9,18 +9,22 @@ const classesData = JSON.parse(readFileSync(classesPath, 'utf8'));
 ---
 
 <Layout title="Our Classes" description="Discover our comprehensive gymnastics programs: JuniorGym, EduGym, UrbanGym, and AGC competitive training.">
-  <section class="classes-hero">
+  <section class="hero section">
     <div class="container">
-      <h1>Our Classes</h1>
+      <h1>Our Classes 🏅</h1>
       <p class="lead">From toddlers to competitive athletes, we offer structured gymnastics programs designed to build strength, confidence, and skill at every level.</p>
+      <div class="cta-buttons">
+        <a href="https://YOUR-BOOKING-LINK/free-trial" class="btn btn-accent" target="_blank" rel="noopener">Book Free Trial ⭐</a>
+        <a href="/contact" class="btn btn-secondary">Contact Us</a>
+      </div>
     </div>
   </section>
 
-  <section class="classes-overview">
+  <section class="classes-overview section section-band">
     <div class="container">
       <div class="class-grid">
         {classesData.map((program) => (
-          <a href={`/${program.slug}`} class="card class-card">
+          <a href={`/${program.slug}`} class="card feature-card card-accent">
             <div class="class-content">
               <h3>{program.title}</h3>
               <p class="class-blurb">{program.blurb}</p>
@@ -40,110 +44,63 @@ const classesData = JSON.parse(readFileSync(classesPath, 'utf8'));
 </Layout>
 
 <style>
-  .classes-hero {
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-    color: var(--color-white);
-    padding: 4rem 0;
-    text-align: center;
-  }
-
-  .classes-hero h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: var(--color-white);
-  }
-
-  .classes-hero .lead {
-    font-size: 1.2rem;
-    opacity: 0.9;
-    max-width: 800px;
-    margin: 0 auto;
-    color: var(--color-white);
-  }
-
-  .classes-overview {
-    padding: 4rem 0;
-  }
-
   .class-grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
     margin-bottom: 3rem;
   }
 
-  .class-card {
-    padding: 20px;
-    text-decoration: none;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: block;
-  }
-
-  .class-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  .class-content {
+    text-align: center;
   }
 
   .class-content h3 {
-    color: var(--color-secondary);
     margin-bottom: 1rem;
-    font-size: 1.3rem;
+    color: var(--dark-navy);
   }
 
   .class-blurb {
-    color: var(--text-muted);
     margin-bottom: 1rem;
-    line-height: 1.5;
+    color: var(--text-muted);
+    line-height: 1.6;
   }
 
   .learn-more {
-    color: var(--color-primary);
+    color: var(--primary-blue);
     font-weight: 600;
-    font-size: 0.9rem;
+    text-decoration: none;
   }
 
   .cta-section {
     text-align: center;
-    padding: 2rem 0;
-    background: var(--bg-light);
+    padding: 3rem 0;
+    background: var(--light-bg);
     border-radius: var(--radius);
   }
 
   .cta-section h2 {
     margin-bottom: 1rem;
-    color: var(--color-secondary);
+    color: var(--dark-navy);
   }
 
   .cta-section p {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     color: var(--text-muted);
   }
 
-  @media (max-width: 900px) {
-    .class-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .classes-hero h1 {
-      font-size: 2rem;
-    }
-    
-    .classes-hero .lead {
-      font-size: 1rem;
-    }
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
   }
 
-  @media (max-width: 600px) {
-    .class-grid {
-      grid-template-columns: 1fr;
-    }
-    
-    .classes-hero {
-      padding: 3rem 0;
-    }
-    
-    .classes-overview {
-      padding: 3rem 0;
+  @media (max-width: 768px) {
+    .cta-buttons {
+      flex-direction: column;
+      align-items: center;
     }
   }
 </style>
