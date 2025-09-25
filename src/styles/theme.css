@@ -1,23 +1,41 @@
-/* Brand Color Variables */
+/* Brand Color Variables - Trident Gymnastics Style Guide */
 :root {
-  --color-primary: #67a0d7;   /* light blue */
-  --color-secondary: #151957; /* deep navy */
-  --color-accent: #ffe037;    /* yellow */
-  --color-black: #111111;     /* near-black for body text */
-  --color-white: #ffffff;
+  /* Primary Brand Colors */
+  --primary-blue: #1573C2;     /* Buttons, links, key headings */
+  --dark-navy: #151957;        /* Hero gradients, main headings */
+  --accent-yellow: #FFD338;    /* Logo accents, highlights, CTAs */
+  --white: #FFFFFF;            /* Backgrounds, cards */
+  --text-muted: #6C757D;       /* Subtext, descriptions */
+  --light-bg: #f8fbff;         /* Section backgrounds */
+  
+  /* Legacy compatibility (mapping to new colors) */
+  --color-primary: var(--primary-blue);
+  --color-secondary: var(--dark-navy);
+  --color-accent: var(--accent-yellow);
+  --color-black: #333333;      /* Improved readability */
+  --color-white: var(--white);
 
-  --bg-page: var(--color-white);
+  /* Enhanced Design System */
+  --bg-page: var(--white);
   --text-body: var(--color-black);
-  --text-muted: #5b6270;
-  --border-subtle: rgba(0,0,0,.08);
+  --border-subtle: rgba(21, 25, 87, 0.1);
 
-  --radius: 14px;
-  --shadow-1: 0 2px 10px rgba(0,0,0,.06);
-  --shadow-2: 0 6px 24px rgba(0,0,0,.10);
+  /* Enhanced spacing and effects */
+  --radius: 20px;              /* More modern rounded corners */
+  --radius-small: 15px;
+  --radius-large: 25px;
+  --shadow-1: 0 10px 30px rgba(21, 25, 87, 0.1);
+  --shadow-2: 0 20px 40px rgba(21, 115, 194, 0.15);
+  --shadow-button: 0 4px 15px rgba(21, 115, 194, 0.4);
+  --shadow-button-hover: 0 6px 20px rgba(21, 25, 87, 0.6);
 
   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
   --maxw: 1200px;
   --space: 20px;
+  
+  /* Section spacing */
+  --section-padding: 80px;
+  --section-padding-mobile: 60px;
 }
 
 /* CSS reset / base */
@@ -39,19 +57,156 @@ img{ max-width:100%; height:auto; display:block; }
 /* Utility classes */
 .container{ max-width: var(--maxw); margin: 0 auto; padding-inline: var(--space); }
 .muted{ color: var(--text-muted); }
-.card{ background: var(--color-white); border:1px solid var(--border-subtle); border-radius: var(--radius); box-shadow: var(--shadow-1); }
+/* Enhanced Card System */
+.card{ 
+  background: var(--white); 
+  padding: 2rem; 
+  border-radius: var(--radius); 
+  box-shadow: var(--shadow-1); 
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  position: relative;
+}
+
+.card:hover{ 
+  transform: translateY(-10px); 
+  box-shadow: var(--shadow-2);
+  border-color: var(--primary-blue);
+}
+
+/* Card with top accent */
+.card-accent::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--primary-blue), var(--accent-yellow));
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+/* Feature cards with enhanced styling */
+.feature-card {
+  text-align: center;
+  padding: 2.5rem 2rem;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-2);
+}
+
+.feature-card h3 {
+  color: var(--dark-navy);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.feature-card p {
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+/* Enhanced Button System */
 .btn{
-  display:inline-block; padding: .7rem 1.1rem; border-radius:999px; font-weight:600;
-  background: var(--color-secondary); color: var(--color-white);
+  display:inline-block; 
+  padding: 15px 30px; 
+  border-radius: 50px; 
+  font-weight: bold;
+  background: var(--primary-blue); 
+  color: var(--white);
   text-decoration: none;
   transition: all 0.3s ease;
+  box-shadow: var(--shadow-button);
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1.2;
 }
-.btn:hover{ background: var(--color-primary); }
-.btn-accent{ background: var(--color-accent); color: #141414; }
-.btn-accent:hover{ filter: brightness(0.95); }
 
-/* Headings */
-h1,h2,h3{ color: var(--color-secondary); margin: .6em 0 .3em; line-height:1.2; }
+.btn:hover{ 
+  background: var(--dark-navy); 
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-button-hover);
+}
+
+.btn-accent{ 
+  background: var(--accent-yellow); 
+  color: var(--dark-navy);
+  box-shadow: 0 4px 15px rgba(255, 211, 56, 0.4);
+}
+
+.btn-accent:hover{ 
+  background: #e8bd00;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(232, 189, 0, 0.6);
+}
+
+/* Button variants */
+.btn-secondary {
+  background: transparent;
+  color: var(--primary-blue);
+  border: 2px solid var(--primary-blue);
+  box-shadow: none;
+}
+
+.btn-secondary:hover {
+  background: var(--primary-blue);
+  color: var(--white);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-button);
+}
+
+/* Enhanced Typography Hierarchy */
+h1{ 
+  font-size: clamp(2.5rem, 5vw, 4rem); 
+  color: var(--dark-navy); 
+  margin: 0 0 1rem; 
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+h2{ 
+  font-size: 2.5rem; 
+  color: var(--dark-navy); 
+  margin: 0 0 1.5rem; 
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+h3{ 
+  font-size: 1.5rem; 
+  color: var(--dark-navy); 
+  margin: 0 0 1rem; 
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+p{ 
+  color: #333; 
+  line-height: 1.6; 
+  margin: 0 0 1rem;
+}
+
+.muted{ 
+  color: var(--text-muted); 
+}
+
+/* Section Background Alternation */
+.section {
+  padding: var(--section-padding) 0;
+}
+
+.section-band {
+  background: var(--light-bg);
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: var(--section-padding-mobile) 0;
+  }
+}
 
 /* Forms */
 input,select,textarea{
@@ -91,13 +246,64 @@ input:focus,select:focus,textarea:focus{ outline:2px solid var(--color-primary);
   font-weight: 600;
 }
 
+/* Enhanced Hero Sections */
+.hero {
+  background: linear-gradient(135deg, var(--dark-navy) 0%, var(--primary-blue) 100%);
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  /* Optional floating star/particle effect */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 80%, rgba(255, 211, 56, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(255, 211, 56, 0.1) 0%, transparent 50%);
+  animation: float 20s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+.hero h1 {
+  color: var(--white);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero p {
+  color: var(--white);
+  font-size: 1.2rem;
+  opacity: 0.95;
+  margin-bottom: 2rem;
+}
+
 /* Footer */
-.site-footer{ background: #f7f9fc; color: var(--color-secondary); border-top:1px solid var(--border-subtle); }
-.site-footer a{ color: var(--color-secondary); }
-.site-footer a:hover{ color: var(--color-primary); }
+.site-footer{ 
+  background: var(--light-bg); 
+  color: var(--dark-navy); 
+  border-top:1px solid var(--border-subtle); 
+}
+.site-footer a{ color: var(--dark-navy); }
+.site-footer a:hover{ color: var(--primary-blue); }
 
 /* Accent bands / callouts */
-.band-accent{ background: var(--color-accent); color:#141414; }
+.band-accent{ 
+  background: var(--accent-yellow); 
+  color: var(--dark-navy); 
+}
 
 /* Header Styles - Perfect centering and unified baseline */
 .site-header { 
