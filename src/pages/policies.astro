@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { readdirSync } from 'fs';
+import { readdirSync, readFileSync } from 'fs';
+import { parse } from 'yaml';
 import path from 'path';
 
 // Read PDF files from public/policies directory
@@ -12,6 +13,33 @@ try {
 } catch (error) {
   // Directory doesn't exist yet, that's okay
   console.log('Policies directory not found, will be created when PDFs are added');
+}
+
+// Read CMS policies from content/policies directory
+let cmsPolicies: any[] = [];
+try {
+  const cmsPoliciesDir = path.join(process.cwd(), 'content', 'policies');
+  const cmsFiles = readdirSync(cmsPoliciesDir);
+  cmsPolicies = cmsFiles
+    .filter(file => file.toLowerCase().endsWith('.md') || file.toLowerCase().endsWith('.json'))
+    .map(file => {
+      const filePath = path.join(cmsPoliciesDir, file);
+      const content = readFileSync(filePath, 'utf8');
+      if (file.toLowerCase().endsWith('.json')) {
+        return JSON.parse(content);
+      } else {
+        // For markdown files, parse frontmatter
+        const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+        if (frontmatterMatch) {
+          const frontmatter = parse(frontmatterMatch[1]);
+          return { ...frontmatter, content: frontmatterMatch[2] };
+        }
+        return { title: file.replace(/\.(md|json)$/i, ''), content };
+      }
+    });
+} catch (error) {
+  // Directory doesn't exist yet, that's okay
+  console.log('CMS policies directory not found');
 }
 
 // Helper function to format filename for display
@@ -39,8 +67,37 @@ function formatPolicyName(filename: string): string {
           <p>Please review these important policies and documents. All participants and their families should be familiar with our guidelines and procedures.</p>
         </div>
 
-        {policyFiles.length > 0 ? (
+        {(cmsPolicies.length > 0 || policyFiles.length > 0) ? (
           <div class="policies-grid">
+            {/* CMS-managed policies first */}
+            {cmsPolicies.map((policy) => (
+              <div class="policy-card cms-policy">
+                <div class="policy-icon">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
+                  </svg>
+                </div>
+                <div class="policy-content">
+                  <h3>{policy.title}</h3>
+                  {policy.updated && (
+                    <p class="policy-date">Updated: {new Date(policy.updated).toLocaleDateString()}</p>
+                  )}
+                  <a 
+                    href={`/uploads/${policy.file}`} 
+                    class="download-btn"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
+                    </svg>
+                    Download PDF
+                  </a>
+                </div>
+              </div>
+            ))}
+            
+            {/* Static folder policies */}
             {policyFiles.map((file) => (
               <div class="policy-card">
                 <div class="policy-icon">
@@ -198,6 +255,17 @@ function formatPolicyName(filename: string): string {
     font-size: 0.9rem;
     margin-bottom: 1rem;
     font-family: monospace;
+  }
+
+  .policy-date {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    font-style: italic;
+  }
+
+  .cms-policy {
+    border-left: 4px solid var(--accent-color);
   }
 
   .download-btn {

@@ -70,32 +70,55 @@ export const siteConfig = {
 
 Update site name, description, and URL in the same config file.
 
-## Content Management
+## Using the Visual Editor
 
-### Decap CMS
+### Accessing the CMS
 
-Access the content management interface at `/admin` after deployment.
+Visit `/admin` on your deployed site to access the Decap CMS visual editor.
 
-#### Setup for Netlify
+### Setup for Netlify
 
-1. Enable Netlify Identity in your Netlify dashboard
-2. Enable Git Gateway
-3. Add users through Netlify Identity
-4. Access `/admin` to start editing content
+1. **Enable Netlify Identity**: In your Netlify dashboard, go to Site Settings → Identity
+2. **Enable Git Gateway**: In Site Settings → Identity → Services, enable Git Gateway
+3. **Add Users**: Use Netlify Identity to invite users who can edit content
+4. **Access Editor**: Visit `/admin` to start editing content
 
-#### Managing School Holidays
+### Content Management
 
-1. Go to `/admin`
-2. Select "School Holidays" collection
-3. Edit the `holidays.yml` file
-4. Add, modify, or remove holiday entries
-5. Save changes
+#### School Holidays
+- **Location**: `/admin` → "School Holidays" collection
+- **Edit**: Modify the `holidays.yml` file with holiday programs, dates, and booking links
+- **Features**: Add/remove programs, update operating rules, set banner images
+
+#### Logos & Branding
+- **Location**: `/admin` → "Site Assets" collection  
+- **Primary Logo**: Uploads to `/uploads/` and displays in header (replaces text logo)
+- **Footer Logo**: Optional footer branding
+- **Hero Image**: Background image for home page hero section
+
+#### Policies (PDFs)
+- **Location**: `/admin` → "Policies" collection
+- **Upload**: Add PDF files with custom titles and update dates
+- **Display**: Shows on `/policies` page with CMS-managed policies listed first
+- **Fallback**: Static PDFs in `/public/policies/` also display
+
+### Media Management
+
+- **Upload Path**: Files uploaded via CMS go to `/public/uploads/`
+- **Static Images**: Place images in `/public/images/` for direct use
+- **PDF Storage**: CMS policies stored in `/uploads/`, static PDFs in `/public/policies/`
 
 ### Adding Policy Documents
 
-1. Create a `public/policies/` directory
-2. Add PDF files to this directory
-3. Rebuild the site to see them listed on `/policies`
+**Via CMS (Recommended):**
+1. Go to `/admin` → "Policies" collection
+2. Click "New Policy"
+3. Add title, upload PDF, set update date
+4. Save and publish
+
+**Via Static Files:**
+1. Add PDF files to `/public/policies/` directory
+2. Rebuild the site to see them listed on `/policies`
 
 ## Project Structure
 

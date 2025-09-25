@@ -1,4 +1,8 @@
 ---
+import { readFileSync } from 'fs';
+import { parse } from 'yaml';
+import path from 'path';
+
 export interface Props {
   title: string;
   description?: string;
@@ -7,6 +11,21 @@ export interface Props {
 const { title, description } = Astro.props;
 const { siteConfig } = await import('../config/site');
 const fullTitle = title === 'Home' ? siteConfig.siteName : `${title} | ${siteConfig.siteName}`;
+
+// Load assets from CMS
+let assets = { primary_logo: null, footer_logo: null, hero_image: null };
+try {
+  const assetsPath = path.join(process.cwd(), 'content', 'assets.yml');
+  const assetsFile = readFileSync(assetsPath, 'utf8');
+  assets = parse(assetsFile);
+} catch (error) {
+  // Assets file doesn't exist or is empty, use defaults
+}
+
+// Determine logo URL
+const primaryLogoUrl = assets.primary_logo ? `/uploads/${assets.primary_logo}` : '/images/logo.png';
+const footerLogoUrl = assets.footer_logo ? `/uploads/${assets.footer_logo}` : null;
+const heroImageUrl = assets.hero_image ? `/uploads/${assets.hero_image}` : null;
 ---
 
 <!DOCTYPE html>
@@ -42,7 +61,11 @@ const fullTitle = title === 'Home' ? siteConfig.siteName : `${title} | ${siteCon
         <div class="header-content">
           <div class="logo">
             <a href="/">
-              <h1>{siteConfig.siteName}</h1>
+              {assets.primary_logo ? (
+                <img src={primaryLogoUrl} alt="Trident Gymnastics" height="60" />
+              ) : (
+                <h1>{siteConfig.siteName}</h1>
+              )}
             </a>
           </div>
           
@@ -86,7 +109,11 @@ const fullTitle = title === 'Home' ? siteConfig.siteName : `${title} | ${siteCon
       <div class="container">
         <div class="footer-content">
           <div class="footer-section">
-            <h3>{siteConfig.siteName}</h3>
+            {footerLogoUrl ? (
+              <img src={footerLogoUrl} alt="Trident Gymnastics" height="40" />
+            ) : (
+              <h3>{siteConfig.siteName}</h3>
+            )}
             <p>Premier gymnastics training facility for all ages.</p>
           </div>
           

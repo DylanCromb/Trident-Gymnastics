@@ -1,12 +1,9 @@
 backend:
   name: git-gateway
-  branch: main
-
-media_folder: "public/uploads"
-public_folder: "/uploads"
-
-site_url: "https://trident-gymnastics.netlify.app"
-display_url: "https://trident-gymnastics.netlify.app"
+  branch: main          # default branch
+media_folder: "public/uploads"    # where uploaded files are stored IN REPO
+public_folder: "/uploads"         # how those files are referenced on the site
+# publish_mode: editorial_workflow # uncomment if we want PR-style review
 
 collections:
   - name: "holidays"
@@ -20,17 +17,39 @@ collections:
             name: "holidays"
             widget: "list"
             fields:
-              - { name: "season", label: "Season", widget: "select", options: ["Summer","Autumn","Winter","Spring"] }
-              - { name: "term_year", label: "Term & Year", widget: "string" }
-              - { name: "start", label: "Start date", widget: "date" }
-              - { name: "end", label: "End date", widget: "date" }
-              - { name: "operating_rules", label: "Operating notes", widget: "text" }
-              - label: "Programs"
-                name: "programs"
-                widget: "list"
+              - { name: season, label: Season, widget: select, options: [Summer,Autumn,Winter,Spring] }
+              - { name: term_year, label: "Term & Year", widget: string }
+              - { name: start, label: "Start date", widget: date }
+              - { name: end, label: "End date", widget: date }
+              - { name: operating_rules, label: "Operating notes", widget: text }
+              - name: programs
+                label: Programs
+                widget: list
                 fields:
-                  - { name: "name", label: "Name", widget: "string" }
-                  - { name: "blurb", label: "Blurb", widget: "text" }
-                  - { name: "age", label: "Age range", widget: "string" }
-                  - { name: "book_url", label: "Booking URL", widget: "string" }
-              - { name: "last_updated", label: "Last updated", widget: "datetime" }
+                  - { name: name, label: Name, widget: string }
+                  - { name: blurb, label: Blurb, widget: text }
+                  - { name: age, label: Age range, widget: string }
+                  - { name: book_url, label: Booking URL, widget: string }
+              - { name: banner, label: "Banner image (optional)", widget: image }
+              - { name: last_updated, label: "Last updated", widget: datetime }
+
+  - name: "siteAssets"
+    label: "Site Assets"
+    files:
+      - file: "content/assets.yml"
+        label: "Logos & Branding"
+        name: "branding"
+        fields:
+          - { name: primary_logo, label: "Primary logo", widget: image, required: false }
+          - { name: footer_logo,  label: "Footer logo",  widget: image, required: false }
+          - { name: hero_image,   label: "Default hero image", widget: image, required: false }
+
+  - name: "policies"
+    label: "Policies (PDFs)"
+    folder: "content/policies"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { name: title, label: "Display title", widget: string }
+      - { name: file,  label: "PDF file", widget: file, media_library: { allow_multiple: false } }
+      - { name: updated, label: "Updated on", widget: datetime, required: false }

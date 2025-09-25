@@ -1,11 +1,31 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { siteConfig } from '../config/site';
+import { readFileSync } from 'fs';
+import { parse } from 'yaml';
+import path from 'path';
+
+// Load assets from CMS
+let assets = { hero_image: null };
+try {
+  const assetsPath = path.join(process.cwd(), 'content', 'assets.yml');
+  const assetsFile = readFileSync(assetsPath, 'utf8');
+  assets = parse(assetsFile);
+} catch (error) {
+  // Assets file doesn't exist or is empty, use defaults
+}
+
+const heroImageUrl = assets.hero_image ? `/uploads/${assets.hero_image}` : null;
 ---
 
 <Layout title="Home" description={siteConfig.siteDescription}>
   <main>
     <section class="hero">
+      {heroImageUrl && (
+        <div class="hero-image">
+          <img src={heroImageUrl} alt="Trident Gymnastics" />
+        </div>
+      )}
       <div class="container">
         <h1>Welcome to Trident Gymnastics</h1>
         <p>Premier gymnastics training facility offering classes, playgym, open gym, and parties for all ages.</p>
@@ -52,6 +72,29 @@ import { siteConfig } from '../config/site';
     color: white;
     padding: 4rem 0;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3;
+  }
+
+  .hero .container {
+    position: relative;
+    z-index: 2;
   }
 
   .container {
