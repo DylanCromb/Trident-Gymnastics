@@ -3,9 +3,78 @@
   --color-primary: #67a0d7;   /* light blue */
   --color-secondary: #151957; /* deep navy */
   --color-accent: #ffe037;    /* yellow */
-  --color-black: #111111;
+  --color-black: #111111;     /* near-black for body text */
   --color-white: #ffffff;
+
+  --bg-page: var(--color-white);
+  --text-body: var(--color-black);
+  --text-muted: #5b6270;
+  --border-subtle: rgba(0,0,0,.08);
+
+  --radius: 14px;
+  --shadow-1: 0 2px 10px rgba(0,0,0,.06);
+  --shadow-2: 0 6px 24px rgba(0,0,0,.10);
+
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
+  --maxw: 1200px;
+  --space: 20px;
 }
+
+/* CSS reset / base */
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background: var(--bg-page);
+  color: var(--text-body);
+  font-family: var(--font-sans);
+  line-height:1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a{ color: var(--color-secondary); text-decoration: none; }
+a:hover{ color: var(--color-primary); }
+img{ max-width:100%; height:auto; display:block; }
+
+/* Utility classes */
+.container{ max-width: var(--maxw); margin: 0 auto; padding-inline: var(--space); }
+.muted{ color: var(--text-muted); }
+.card{ background: var(--color-white); border:1px solid var(--border-subtle); border-radius: var(--radius); box-shadow: var(--shadow-1); }
+.btn{
+  display:inline-block; padding: .7rem 1.1rem; border-radius:999px; font-weight:600;
+  background: var(--color-secondary); color: var(--color-white);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.btn:hover{ background: var(--color-primary); }
+.btn-accent{ background: var(--color-accent); color: #141414; }
+.btn-accent:hover{ filter: brightness(0.95); }
+
+/* Headings */
+h1,h2,h3{ color: var(--color-secondary); margin: .6em 0 .3em; line-height:1.2; }
+
+/* Forms */
+input,select,textarea{
+  border:1px solid var(--border-subtle); border-radius:10px; padding:.65rem .8rem;
+  font: inherit; color: var(--text-body); background: var(--color-white);
+}
+input:focus,select:focus,textarea:focus{ outline:2px solid var(--color-primary); }
+
+/* Header / nav colors (Header.astro should use these) */
+.site-header{ background: var(--color-white); border-bottom:1px solid var(--border-subtle); }
+.main-nav a{ color: var(--color-secondary); }
+.main-nav a:hover{ color: var(--color-primary); }
+.nav-active{ border-bottom:2px solid var(--color-accent); font-weight:700; }
+.submenu{ background: var(--color-white); border:1px solid var(--border-subtle); box-shadow: var(--shadow-2); }
+.submenu a:hover{ background: rgba(103,160,215,.12); }
+
+/* Footer */
+.site-footer{ background: #f7f9fc; color: var(--color-secondary); border-top:1px solid var(--border-subtle); }
+.site-footer a{ color: var(--color-secondary); }
+.site-footer a:hover{ color: var(--color-primary); }
+
+/* Accent bands / callouts */
+.band-accent{ background: var(--color-accent); color:#141414; }
 
 /* Header Styles */
 .header {
@@ -14,12 +83,6 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
 }
 
 .nav {

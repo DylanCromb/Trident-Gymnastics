@@ -19,57 +19,55 @@ const heroImageUrl = assets.hero_image ? `/uploads/${assets.hero_image}` : null;
 ---
 
 <Layout title="Home" description={siteConfig.siteDescription}>
-  <main>
-    <section class="hero">
-      {heroImageUrl && (
-        <div class="hero-image">
-          <img src={heroImageUrl} alt="Trident Gymnastics" />
-        </div>
-      )}
-      <div class="container">
-        <h1>Welcome to Trident Gymnastics</h1>
-        <p>Premier gymnastics training facility offering classes, playgym, open gym, and parties for all ages.</p>
-        <div class="cta-buttons">
-          <a href="/classes" class="btn btn-primary">View Classes</a>
-          <a href="/contact" class="btn btn-secondary">Contact Us</a>
-        </div>
+  <section class="hero">
+    {heroImageUrl && (
+      <div class="hero-image">
+        <img src={heroImageUrl} alt="Trident Gymnastics" />
       </div>
-    </section>
+    )}
+    <div class="container">
+      <h1>Welcome to Trident Gymnastics</h1>
+      <p>Premier gymnastics training facility offering classes, playgym, open gym, and parties for all ages.</p>
+      <div class="cta-buttons">
+        <a href="/classes" class="btn btn-accent">View Classes</a>
+        <a href="/contact" class="btn btn-secondary">Contact Us</a>
+      </div>
+    </div>
+  </section>
 
-    <section class="features">
-      <div class="container">
-        <h2>What We Offer</h2>
-        <div class="feature-grid">
-          <div class="feature-card">
-            <h3>Classes</h3>
-            <p>Structured gymnastics classes for all skill levels and ages.</p>
-            <a href="/classes" class="btn btn-outline">Learn More</a>
-          </div>
-          <div class="feature-card">
-            <h3>Playgym</h3>
-            <p>Fun, unstructured play time in our safe gymnastics environment.</p>
-            <a href="/playgym" class="btn btn-outline">Learn More</a>
-          </div>
-          <div class="feature-card">
-            <h3>Open Gym</h3>
-            <p>Practice your skills during our open gym sessions.</p>
-            <a href="/opengym" class="btn btn-outline">Learn More</a>
-          </div>
-          <div class="feature-card">
-            <h3>Parties</h3>
-            <p>Celebrate your special day with a gymnastics-themed party.</p>
-            <a href="/parties" class="btn btn-outline">Learn More</a>
-          </div>
+  <section class="features">
+    <div class="container">
+      <h2>What We Offer</h2>
+      <div class="feature-grid">
+        <div class="card feature-card">
+          <h3>Classes</h3>
+          <p>Structured gymnastics classes for all skill levels and ages.</p>
+          <a href="/classes" class="btn">Learn More</a>
+        </div>
+        <div class="card feature-card">
+          <h3>Playgym</h3>
+          <p>Fun, unstructured play time in our safe gymnastics environment.</p>
+          <a href="/playgym" class="btn">Learn More</a>
+        </div>
+        <div class="card feature-card">
+          <h3>Open Gym</h3>
+          <p>Practice your skills during our open gym sessions.</p>
+          <a href="/opengym" class="btn">Learn More</a>
+        </div>
+        <div class="card feature-card">
+          <h3>Parties</h3>
+          <p>Celebrate your special day with a gymnastics-themed party.</p>
+          <a href="/parties" class="btn">Learn More</a>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 </Layout>
 
 <style>
   .hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    color: var(--color-white);
     padding: 4rem 0;
     text-align: center;
     position: relative;
@@ -97,22 +95,18 @@ const heroImageUrl = assets.hero_image ? `/uploads/${assets.hero_image}` : null;
     z-index: 2;
   }
 
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-  }
-
   .hero h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
     font-weight: 700;
+    color: var(--color-white);
   }
 
   .hero p {
     font-size: 1.25rem;
     margin-bottom: 2rem;
     opacity: 0.9;
+    color: var(--color-white);
   }
 
   .cta-buttons {
@@ -122,57 +116,27 @@ const heroImageUrl = assets.hero_image ? `/uploads/${assets.hero_image}` : null;
     flex-wrap: wrap;
   }
 
-  .btn {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-  }
-
-  .btn-primary {
-    background: #ff6b6b;
-    color: white;
-  }
-
-  .btn-primary:hover {
-    background: #ff5252;
-    transform: translateY(-2px);
-  }
-
   .btn-secondary {
     background: transparent;
-    color: white;
-    border: 2px solid white;
+    color: var(--color-white);
+    border: 2px solid var(--color-white);
   }
 
   .btn-secondary:hover {
-    background: white;
-    color: #667eea;
-  }
-
-  .btn-outline {
-    background: transparent;
-    color: #667eea;
-    border: 2px solid #667eea;
-  }
-
-  .btn-outline:hover {
-    background: #667eea;
-    color: white;
+    background: var(--color-white);
+    color: var(--color-primary);
   }
 
   .features {
     padding: 4rem 0;
-    background: #f8f9fa;
+    background: #f7f9fc;
   }
 
   .features h2 {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 3rem;
-    color: #333;
+    color: var(--color-secondary);
   }
 
   .feature-grid {
@@ -182,10 +146,7 @@ const heroImageUrl = assets.hero_image ? `/uploads/${assets.hero_image}` : null;
   }
 
   .feature-card {
-    background: white;
     padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: transform 0.3s ease;
   }
@@ -197,12 +158,12 @@ const heroImageUrl = assets.hero_image ? `/uploads/${assets.hero_image}` : null;
   .feature-card h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    color: #333;
+    color: var(--color-secondary);
   }
 
   .feature-card p {
     margin-bottom: 1.5rem;
-    color: #666;
+    color: var(--text-muted);
     line-height: 1.6;
   }
 
