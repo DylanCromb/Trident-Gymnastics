@@ -68,6 +68,29 @@ input:focus,select:focus,textarea:focus{ outline:2px solid var(--color-primary);
 .submenu{ background: var(--color-white); border:1px solid var(--border-subtle); box-shadow: var(--shadow-2); }
 .submenu a:hover{ background: rgba(103,160,215,.12); }
 
+/* Unified Navigation Styling */
+.main-nav a, .main-nav button.nav-btn {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.main-nav a:hover, .main-nav button.nav-btn:hover {
+  color: var(--color-primary);
+}
+
+.main-nav a.active, .main-nav button.nav-btn.active {
+  border-bottom: 2px solid var(--color-accent);
+  font-weight: 600;
+}
+
 /* Footer */
 .site-footer{ background: #f7f9fc; color: var(--color-secondary); border-top:1px solid var(--border-subtle); }
 .site-footer a{ color: var(--color-secondary); }
@@ -112,11 +135,12 @@ input:focus,select:focus,textarea:focus{ outline:2px solid var(--color-primary);
 }
 
 .nav-link {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: 600;
   color: var(--color-secondary);
   text-decoration: none;
-  font-weight: 500;
-  font-size: 1rem;
-  padding: 0.5rem 0;
+  padding: 0.5rem 1rem;
   position: relative;
   transition: all 0.3s ease;
   border: none;
@@ -125,6 +149,8 @@ input:focus,select:focus,textarea:focus{ outline:2px solid var(--color-primary);
   display: flex;
   align-items: center;
   gap: 0.25rem;
+  letter-spacing: 0.3px;
+  line-height: 1.4;
 }
 
 .nav-link:hover,
@@ -135,7 +161,7 @@ input:focus,select:focus,textarea:focus{ outline:2px solid var(--color-primary);
 }
 
 .nav-link.active {
-  font-weight: 700;
+  font-weight: 600;
   border-bottom: 2px solid var(--color-accent);
 }
 

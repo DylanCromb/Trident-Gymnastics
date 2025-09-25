@@ -1,5 +1,36 @@
 ---
 // Header component with centered logo and split navigation
+import { readFileSync } from 'fs';
+import { parse } from 'yaml';
+import path from 'path';
+
+// Load assets from CMS
+let assets = { primary_logo: null };
+try {
+  const assetsPath = path.join(process.cwd(), 'content', 'assets.yml');
+  const assetsFile = readFileSync(assetsPath, 'utf8');
+  assets = parse(assetsFile);
+} catch (error) {
+  // Assets file doesn't exist or is empty, use defaults
+}
+
+// Determine logo URL
+const primaryLogoUrl = assets.primary_logo ? `/uploads/${assets.primary_logo}` : '/images/logo.png';
+
+// Get current page path for active link detection
+const currentPath = Astro.url.pathname;
+
+// Helper function to check if a link is active
+function isActiveLink(href: string): boolean {
+  if (href === '/') {
+    return currentPath === '/';
+  }
+  return currentPath.startsWith(href);
+}
+
+// Check if Classes dropdown should be active
+const classesPages = ['/juniorgym', '/edugym', '/urbangym', '/squad'];
+const isClassesActive = classesPages.some(page => currentPath.startsWith(page));
 ---
 
 <header class="header">
@@ -8,7 +39,7 @@
       <div class="nav-left">
         <div class="nav-item dropdown">
           <button 
-            class="nav-link dropdown-toggle" 
+            class={`nav-link dropdown-toggle ${isClassesActive ? 'active' : ''}`}
             aria-expanded="false" 
             aria-haspopup="true"
             id="classes-dropdown"
@@ -34,21 +65,21 @@
           </ul>
         </div>
         
-        <a href="/playgym" class="nav-link">PlayGym</a>
-        <a href="/school-holidays" class="nav-link">Holiday Program</a>
+        <a href="/playgym" class={`nav-link ${isActiveLink('/playgym') ? 'active' : ''}`}>PlayGym</a>
+        <a href="/school-holidays" class={`nav-link ${isActiveLink('/school-holidays') ? 'active' : ''}`}>Holiday Program</a>
       </div>
 
       <div class="logo">
         <a href="/" aria-label="Trident Gymnastics Home">
-          <img src="/images/logo.svg" alt="Trident Gymnastics" class="logo-img" />
+          <img src={primaryLogoUrl} alt="Trident Gymnastics" class="logo-img" />
         </a>
       </div>
 
       <div class="nav-right">
-        <a href="/parties" class="nav-link">Birthday Parties</a>
-        <a href="/dates" class="nav-link">Dates</a>
-        <a href="/about" class="nav-link">About</a>
-        <a href="/contact" class="nav-link">Customer Portal</a>
+        <a href="/parties" class={`nav-link ${isActiveLink('/parties') ? 'active' : ''}`}>Birthday Parties</a>
+        <a href="/dates" class={`nav-link ${isActiveLink('/dates') ? 'active' : ''}`}>Dates</a>
+        <a href="/about" class={`nav-link ${isActiveLink('/about') ? 'active' : ''}`}>About</a>
+        <a href="/contact" class={`nav-link ${isActiveLink('/contact') ? 'active' : ''}`}>Customer Portal</a>
       </div>
 
       <!-- Mobile hamburger menu -->
