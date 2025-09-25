@@ -1,0 +1,22 @@
+[
+  {
+    "slug": "juniorgym",
+    "title": "JuniorGym",
+    "blurb": "Structured gymnastics for our youngest athletes: movement, coordination and fun in a safe, supportive environment."
+  },
+  {
+    "slug": "edugym",
+    "title": "EduGym",
+    "blurb": "Curriculum-aligned gymnastic movement designed for school groups and physical literacy."
+  },
+  {
+    "slug": "urbangym",
+    "title": "UrbanGym",
+    "blurb": "Parkour-inspired movement—vault, swing, climb and flow in a safe coached environment."
+  },
+  {
+    "slug": "agc",
+    "title": "AGC",
+    "blurb": "Australian Gymnastics Club competitive stream—structured training with clear progressions."
+  }
+]

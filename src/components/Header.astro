@@ -52,6 +52,8 @@ const isClassesActive = classesPages.some(page => currentPath.startsWith(page));
             <li role="none"><a role="menuitem" href="/edugym">EduGym</a></li>
             <li role="none"><a role="menuitem" href="/urbangym">UrbanGym</a></li>
             <li role="none"><a role="menuitem" href="/agc">AGC</a></li>
+            <li role="separator" class="submenu-divider"></li>
+            <li role="none"><a role="menuitem" href="/classes">All Classes</a></li>
           </ul>
         </li>
         <li><a href="/playgym" class={isActiveLink('/playgym') ? 'active' : ''}>PlayGym</a></li>
@@ -66,28 +68,73 @@ const isClassesActive = classesPages.some(page => currentPath.startsWith(page));
 </header>
 
 <script>
-  // Dropdown functionality
+  // Enhanced dropdown functionality
   document.addEventListener('DOMContentLoaded', function() {
     const navBtn = document.querySelector('.nav-btn');
     const submenu = document.querySelector('.submenu');
+    const hasSubmenu = document.querySelector('.has-submenu');
 
-    // Desktop dropdown
-    if (navBtn && submenu) {
-      navBtn.addEventListener('mouseenter', () => {
-        submenu.style.display = 'block';
+    if (navBtn && submenu && hasSubmenu) {
+      // Click to toggle
+      navBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isOpen = navBtn.getAttribute('aria-expanded') === 'true';
+        navBtn.setAttribute('aria-expanded', !isOpen);
+        submenu.classList.toggle('open', !isOpen);
       });
 
-      navBtn.addEventListener('mouseleave', () => {
-        submenu.style.display = 'none';
+      // Keyboard navigation
+      navBtn.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          const firstItem = submenu.querySelector('a[role="menuitem"]');
+          if (firstItem) {
+            firstItem.focus();
+            navBtn.setAttribute('aria-expanded', 'true');
+            submenu.classList.add('open');
+          }
+        }
       });
 
-      // Keep dropdown open when hovering over it
-      submenu.addEventListener('mouseenter', () => {
-        submenu.style.display = 'block';
+      // Submenu keyboard navigation
+      submenu.addEventListener('keydown', (e) => {
+        const items = Array.from(submenu.querySelectorAll('a[role="menuitem"]'));
+        const currentIndex = items.indexOf(e.target);
+
+        switch (e.key) {
+          case 'ArrowDown':
+            e.preventDefault();
+            const nextIndex = (currentIndex + 1) % items.length;
+            items[nextIndex].focus();
+            break;
+          case 'ArrowUp':
+            e.preventDefault();
+            const prevIndex = currentIndex === 0 ? items.length - 1 : currentIndex - 1;
+            items[prevIndex].focus();
+            break;
+          case 'Escape':
+            navBtn.focus();
+            navBtn.setAttribute('aria-expanded', 'false');
+            submenu.classList.remove('open');
+            break;
+        }
       });
 
-      submenu.addEventListener('mouseleave', () => {
-        submenu.style.display = 'none';
+      // Close on outside click
+      document.addEventListener('click', (e) => {
+        if (!hasSubmenu.contains(e.target)) {
+          navBtn.setAttribute('aria-expanded', 'false');
+          submenu.classList.remove('open');
+        }
+      });
+
+      // Close on Escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && submenu.classList.contains('open')) {
+          navBtn.focus();
+          navBtn.setAttribute('aria-expanded', 'false');
+          submenu.classList.remove('open');
+        }
       });
     }
   });

@@ -190,7 +190,8 @@ input:focus,select:focus,textarea:focus{ outline:2px solid var(--color-primary);
 
 /* Keep the dropdown attached and above content */
 .has-submenu { 
-  position: relative; 
+  position: relative;
+  padding-block-start: 6px; /* hover pad to prevent flicker */
 }
 
 .submenu {
@@ -203,11 +204,12 @@ input:focus,select:focus,textarea:focus{ outline:2px solid var(--color-primary);
   padding: 8px 0;
   min-width: 220px;
   display: none;
-  z-index: 20;
+  z-index: 30;
 }
 
+.has-submenu:hover .submenu,
 .has-submenu:focus-within .submenu,
-.has-submenu:hover .submenu { 
+.has-submenu .submenu.open { 
   display: block; 
 }
 
@@ -220,6 +222,12 @@ input:focus,select:focus,textarea:focus{ outline:2px solid var(--color-primary);
 .submenu a:hover { 
   background: rgba(103,160,215,.12); 
   color: var(--color-secondary); 
+}
+
+.submenu-divider {
+  height: 1px;
+  background: var(--border-subtle);
+  margin: 4px 0;
 }
 
 .nav-link {
