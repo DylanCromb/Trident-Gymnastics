@@ -150,3 +150,8 @@ const heroImageUrl = assets.hero_image ? `/uploads/${assets.hero_image}` : null;
     color: var(--text-muted);
   }
 </style>
+
+<script>
+  // Global dropdown initialization for all pages
+  import("/src/scripts/nav-dropdown.ts").then(m => m.setupNavDropdown());
+</script>
