@@ -99,89 +99,127 @@ input:focus,select:focus,textarea:focus{ outline:2px solid var(--color-primary);
 /* Accent bands / callouts */
 .band-accent{ background: var(--color-accent); color:#141414; }
 
-/* Header Styles - Logo emphasis with nav below */
-.site-header {
-  background: var(--color-white);
-  border-bottom: 1px solid var(--border-subtle);
-  text-align: center;
-  padding-top: 10px;
+/* Header Styles - Perfect centering and unified baseline */
+.site-header { 
+  background: var(--color-white); 
+  border-bottom: 1px solid var(--border-subtle); 
   position: sticky;
   top: 0;
   z-index: 1000;
 }
 
-.logo-wrap {
-  margin-bottom: 8px;
+.logo-row {
+  display: grid;
+  place-items: center;      /* perfectly centers both axes */
+  padding: 12px 0 6px;
 }
 
-.logo img {
-  height: 90px;        /* increase for prominence */
-  width: auto;
+.logo { 
+  display: inline-block; 
 }
 
-.main-nav ul {
-  list-style: none;
+.logo img { 
+  height: 96px; 
+  width: auto; 
+  display: block; 
+}
+
+@media (max-width: 900px) { 
+  .logo img { 
+    height: 76px; 
+  } 
+}
+
+.nav-band {
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--color-white);
+}
+
+.main-nav { 
+  max-width: var(--maxw); 
+  margin: 0 auto; 
+}
+
+.nav-list {
   display: flex;
   justify-content: center;
-  gap: 36px;           /* space between items */
-  padding: 0;
+  align-items: center;          /* baseline alignment fix */
+  gap: 40px;
+  list-style: none;
   margin: 0;
-  flex-wrap: wrap;
+  padding: 8px 16px;            /* creates consistent band height */
+  flex-wrap: wrap;              /* allow wrap on small screens */
 }
 
-.main-nav a, .nav-btn {
+.nav-list a,
+.nav-btn {
+  display: inline-flex;         /* key: equal vertical centering */
+  align-items: center;          /* key: same baseline */
+  height: 44px;                 /* consistent tab height */
+  padding: 0 6px;
   font-family: var(--font-sans);
   font-weight: 600;
-  font-size: 18px;
-  line-height: 1.4;
+  font-size: 20px;              /* matches screenshots; adjust if needed */
+  line-height: 1;               /* prevents extra bottom space on button */
   color: var(--color-secondary);
   text-decoration: none;
   background: none;
-  border: none;
+  border: 0;
   cursor: pointer;
-  padding: 6px 10px;
 }
 
-.main-nav a:hover, .nav-btn:hover {
-  color: var(--color-primary);
+.nav-list a:hover,
+.nav-btn:hover { 
+  color: var(--color-primary); 
 }
 
-.active {
-  border-bottom: 2px solid var(--color-accent);
+/* Active underline without shifting layout */
+.nav-list a.active,
+.nav-btn.active { 
+  box-shadow: inset 0 -2px 0 0 var(--color-accent); 
 }
 
-/* Dropdown */
+/* Make the caret purely visual so it doesn't affect baseline */
+.nav-btn::after {
+  content: "▾";
+  margin-left: .4rem;
+  font-size: .9em;
+  line-height: 1;
+}
+
+/* Keep the dropdown attached and above content */
+.has-submenu { 
+  position: relative; 
+}
+
 .submenu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
   background: var(--color-white);
   border: 1px solid var(--border-subtle);
   box-shadow: var(--shadow-2);
-  padding: 10px 0;
-  position: absolute;
-  display: none;
-  z-index: 10;
+  padding: 8px 0;
   min-width: 220px;
+  display: none;
+  z-index: 20;
 }
 
-.has-submenu:hover .submenu {
-  display: block;
+.has-submenu:focus-within .submenu,
+.has-submenu:hover .submenu { 
+  display: block; 
 }
 
-.submenu li {
-  margin: 0;
+.submenu a { 
+  display: block; 
+  padding: 8px 14px; 
+  white-space: nowrap; 
 }
 
-.submenu a {
-  display: block;
-  padding: 0.75rem 1rem;
-  color: var(--color-secondary);
-  text-decoration: none;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-}
-
-.submenu a:hover {
-  background: var(--color-primary);
-  color: var(--color-white);
+.submenu a:hover { 
+  background: rgba(103,160,215,.12); 
+  color: var(--color-secondary); 
 }
 
 .nav-link {
@@ -397,13 +435,20 @@ input:focus,select:focus,textarea:focus{ outline:2px solid var(--color-primary);
   transform: rotate(180deg);
 }
 
-/* Responsive breakpoints */
-@media (max-width: 800px) {
-  .main-nav ul { 
-    gap: 20px; 
+/* Baseline/spacing polish at narrow widths */
+@media (max-width: 1200px) {
+  .nav-list { 
+    gap: 28px; 
   }
-  .logo img { 
-    height: 70px; 
+}
+
+@media (max-width: 900px) {
+  .nav-list { 
+    gap: 18px; 
+  }
+  .nav-list a, .nav-btn { 
+    font-size: 18px; 
+    height: 42px; 
   }
 }
 
